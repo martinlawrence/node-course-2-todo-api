@@ -30,13 +30,13 @@ app.get('/todos/:id', (req, res) => {
     }
 });
 
-app.put('/todos/:id', (req, res) => {
+app.delete('/todos/:id', (req, res) => {
     var id = req.params.id;
     if(!ObjectID.isValid(id)) {
         res.status(404).send();
     }
     else {
-        Todo.findById(id).then((todo) => {
+        Todo.findByIdAndRemove(id).then((todo) => {
             if(!todo) {
                 res.status(404).send();
             }
